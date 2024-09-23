@@ -1,0 +1,4 @@
+name: Litestrike
+version: 0.0.1
+main: gg.litestrike.game.Litestrike
+api-version: '1.21.1'
