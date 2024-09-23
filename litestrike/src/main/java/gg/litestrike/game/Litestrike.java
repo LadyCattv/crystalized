@@ -11,7 +11,7 @@ public final class Litestrike extends JavaPlugin {
   public void onEnable() {
 
     getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-
+	this.getCommand("spawnplayer").setExecutor(new gg.windcore.treasure.teams());
   }
 
   @Override
