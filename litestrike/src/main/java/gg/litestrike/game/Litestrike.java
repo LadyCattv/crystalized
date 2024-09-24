@@ -14,6 +14,7 @@ public final class Litestrike extends JavaPlugin {
 
     getCommand("mapdata").setExecutor(mapdata);
 
+		this.getCommand("spawnplayer").setExecutor(new gg.windcore.treasure.teams());
   }
 
   @Override
