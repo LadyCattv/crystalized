@@ -1,6 +1,6 @@
-package gg.windcore.treasure;
+package gg.litestrike.game;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.bukkit.Bukkit;
@@ -8,13 +8,11 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import static org.bukkit.entity.EntityType.PLAYER;
 
-public class teams implements CommandExecutor {
-    private List<Player> list = new ArrayList<Player>();
+public class Teams implements CommandExecutor {
     private List<Player> team1 = new ArrayList<Player>();
     private List<Player> team2 = new ArrayList<Player>();
 
@@ -22,10 +20,12 @@ public class teams implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(sender instanceof Player){
             Player player = (Player) sender;
-            World w = Bukkit.getServer().getWorld(player.getLocation().getWorld().getName());
+            World w = player.getLocation().getWorld();
+
             w.spawnEntity(player.getLocation(), PLAYER);
             w.spawnEntity(player.getLocation(), PLAYER);
             w.spawnEntity(player.getLocation(), PLAYER);
+
             this.shuffle();
             player.sendMessage("Team 1: "+ team1 +"; Team 2: "+ team2);
         }
@@ -33,7 +33,7 @@ public class teams implements CommandExecutor {
     }
 
     private void shuffle(){
-        list = (List<Player>)Bukkit.getOnlinePlayers();
+        List<Player> list = (List<Player>)Bukkit.getOnlinePlayers();
         Collections.shuffle((List<Player>) list);
         int size = (int) Math.ceil(list.size()/2);
         Player[] listarr = list.toArray(new Player[] {});

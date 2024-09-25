@@ -6,8 +6,14 @@ api-version: '1.21.1'
 commands:
   mapdata:
     description: "For debugging purposes"
-    usage: "/mapdata [subcommand]"
+    usage: "/mapdata"
     aliases: []
     permission: litestrike.command.game
     permission-message: "you dont have permission to run the command"
 
+  spawnplayer:
+    description: "Spawn three dummy Players to test"
+    usage: "/spawnplayer"
+    aliases: []
+    permission: litestrike.command.game
+    permission-message: "you dont have permission to run the command"
