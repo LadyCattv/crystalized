@@ -1,16 +1,12 @@
 package gg.litestrike.game;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,16 +14,15 @@ import com.google.gson.JsonParser;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.logging.Level;
 
 // this will read a file, map_config.json, in the current world directory,
 // from this file it will read, for example: the spawn points and map_name.
 // this is a singleton
-public class MapData implements TabExecutor {
-	public Location placer_spawn;
-	public Location breaker_spawn;
-	public Location que_spawn;
+public class MapData implements CommandExecutor {
+	public double[] placer_spawn;
+	public double[] breaker_spawn;
+	public double[] que_spawn;
 
 	public String map_name;
 
@@ -38,6 +33,7 @@ public class MapData implements TabExecutor {
 	// border gets placed 1 block above this block type
 	public Material border_specifier;
 
+	// This handles the /mapdata command
   @Override
   public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label,
       @NotNull String[] args) {
@@ -45,38 +41,30 @@ public class MapData implements TabExecutor {
 
 		cmd_sender.sendMessage(this.toString());
 
+
 		return true;
 	}
 
-  @Override
-  public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command,
-      @NotNull String label, @NotNull String[] args) {
-
-		return null;
-	}
-
 	public MapData() {
-
 		try {
 			String file_content = Files.readString(Paths.get("./world/map_config.json"));
 			JsonObject json = JsonParser.parseString(file_content).getAsJsonObject();
 
-			// TODO FIXME idk how to get the correct world
-			World world = Bukkit.getServer().getWorld("world");
 
-
+			// TODO add pitch and yaw to the config file
 			JsonArray p_spawn = json.get("placer_spawn").getAsJsonArray();
-			this.placer_spawn = new Location(world, p_spawn.get(0).getAsInt(), p_spawn.get(1).getAsInt(), p_spawn.get(2).getAsInt());
+			this.placer_spawn = new double[]{p_spawn.get(0).getAsDouble(), p_spawn.get(1).getAsDouble(), p_spawn.get(2).getAsDouble()};
 
 			JsonArray b_spawn = json.get("breaker_spawn").getAsJsonArray();
-			this.breaker_spawn = new Location(world, b_spawn.get(0).getAsInt(), b_spawn.get(1).getAsInt(), b_spawn.get(2).getAsInt());
+			this.breaker_spawn = new double[]{b_spawn.get(0).getAsDouble(), b_spawn.get(1).getAsDouble(), b_spawn.get(2).getAsDouble()};
 
 			JsonArray q_spawn = json.get("que_spawn").getAsJsonArray();
-			this.que_spawn = new Location(world, q_spawn.get(0).getAsInt(), q_spawn.get(1).getAsInt(), q_spawn.get(2).getAsInt());
+			this.que_spawn =  new double[]{q_spawn.get(0).getAsDouble(), q_spawn.get(1).getAsDouble(), q_spawn.get(2).getAsDouble()};
 
-			// FIXME border specifier is null???
 			this.map_name = json.get("map_name").getAsString();
-			this.border_specifier = Material.getMaterial(json.get("border_specifier").getAsString());
+
+			String b_spec = json.get("border_specifier").getAsString();
+			this.border_specifier = Material.matchMaterial(b_spec);
 
 			this.jump_pads = json.get("enable_jump_pads") != null;
 			this.openable_doors = json.get("enable_openable_doors") != null;
@@ -87,6 +75,7 @@ public class MapData implements TabExecutor {
 			// disable plugin when failure
 			Bukkit.getPluginManager().disablePlugin(Litestrike.getInstance());
 		}
+
 	}
 
 	public String toString() {

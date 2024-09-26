@@ -32,6 +32,7 @@ public class Teams implements CommandExecutor {
         return true;
     }
 
+    // make this a constructor
     private void shuffle(){
         List<Player> list = (List<Player>)Bukkit.getOnlinePlayers();
         Collections.shuffle((List<Player>) list);
