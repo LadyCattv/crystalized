@@ -2,12 +2,14 @@ package gg.litestrike.game;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+// TODO add a sanity checker class
+
 public final class Litestrike extends JavaPlugin {
 
 	// holds all the config about a map, like the spawn/border coordinates
 	public MapData mapdata = new MapData();
 
-	// public GameController game_controller;
+	public GameController game_controller;
 
 	@Override
 	public void onEnable() {

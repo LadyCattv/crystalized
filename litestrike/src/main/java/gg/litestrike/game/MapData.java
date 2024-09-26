@@ -51,7 +51,7 @@ public class MapData implements CommandExecutor {
 			JsonObject json = JsonParser.parseString(file_content).getAsJsonObject();
 
 
-			// TODO add pitch and yaw to the config file
+			// pitch and yaw are not needed, as we just make players look at enemy spawn
 			JsonArray p_spawn = json.get("placer_spawn").getAsJsonArray();
 			this.placer_spawn = new double[]{p_spawn.get(0).getAsDouble(), p_spawn.get(1).getAsDouble(), p_spawn.get(2).getAsDouble()};
 
