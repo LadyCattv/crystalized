@@ -10,10 +10,3 @@ commands:
     aliases: []
     permission: litestrike.command.game
     permission-message: "you dont have permission to run the command"
-
-  spawnplayer:
-    description: "Spawn three dummy Players to test"
-    usage: "/spawnplayer"
-    aliases: []
-    permission: litestrike.command.game
-    permission-message: "you dont have permission to run the command"
