@@ -96,7 +96,7 @@ public class Teams {
 		throw new RuntimeException(new Exception("player is in no team"));
 	}
 
-	public Team get_team(String name) {
+	public static Team get_team(String name) {
 		if (placers.contains(name)) {
 			return Team.Placer;
 		}

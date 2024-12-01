@@ -73,10 +73,13 @@ public class Shop implements InventoryHolder {
 		return Component.text("\uA000" + "\uA001" + "\uE104" + pd.getMoney()).color(WHITE);
 	}
 
-	public void updateTitle(Player p) {
+	public void updateTitle(Player p, LSItem i) {
 		Shop s = Shop.getShop(p);
 		s.currentView.close();
 		s.currentView = Bukkit.getServer().createInventory(this, 54, title(p));
+		if(i != null){
+			s.currentView.setItem(49, i.displayItem);
+		}
 		p.openInventory(s.currentView);
 		setItems(p, s.shopItems);
 		setDefuser(p);

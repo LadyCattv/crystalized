@@ -57,9 +57,6 @@ public class LSItem {
 		 * To-Do List for hard coding new items:
 		 * 1. create new LSItem object
 		 * 2. add the new LSItem object to the lsItems list
-		 * 3. code a new branch to the switch in setItems()
-		 * 4. code a new branch to the switch in getItemCategory()
-		 * 5. code a new branch to the switch in buyItem()
 		 */
 
 		LSItem diamondChestplate = new LSItem(new ItemStack(Material.DIAMOND_CHESTPLATE),
@@ -78,8 +75,8 @@ public class LSItem {
 				"Don't be a loser buy a defuser -Tubbo", ItemCategory.Defuser, "Defuser", null, null, null, null);
 		LSItem pickaxe = new LSItem(new ItemStack(Material.STONE_PICKAXE), new ItemStack(Material.STONE_PICKAXE), 0, null,
 				ItemCategory.Defuser, null, null, null, null, null);
-		LSItem gapple = new LSItem(new ItemStack(Material.GOLDEN_APPLE), new ItemStack(Material.GOLDEN_APPLE), 500, null,
-				ItemCategory.Consumable, null, null, null, null, 49);
+		LSItem gapple = new LSItem(new ItemStack(Material.GOLDEN_APPLE), new ItemStack(Material.GOLDEN_APPLE), 750, null,
+				ItemCategory.Consumable, null, null, null, null, 48);
 		LSItem ironChestplate = new LSItem(new ItemStack(Material.IRON_CHESTPLATE), new ItemStack(Material.IRON_CHESTPLATE),
 				250, null, ItemCategory.Armor, null, PROTECTION, 1, null, 40);
 		LSItem quickdraw = new LSItem(new ItemStack(Material.CROSSBOW), new ItemStack(Material.CROSSBOW), 2000,
@@ -91,7 +88,7 @@ public class LSItem {
 		LSItem marksman = new LSItem(new ItemStack(Material.BOW), new ItemStack(Material.BOW), 750, null,
 				ItemCategory.Range, "Marksman Bow", POWER, 1, 1, 6);
 		LSItem ricochet = new LSItem(new ItemStack(Material.BOW), new ItemStack(Material.BOW), 1500,
-				"A bouncy bow with bouncy arrows.", ItemCategory.Range, "Ricochet Bow", PUNCH, 1, 2, 8);
+				"A bouncy bow with bouncy arrows.", ItemCategory.Range, "Ricochet Bow", PUNCH, 1, 3, 8);
 		LSItem multishot = new LSItem(new ItemStack(Material.CROSSBOW), new ItemStack(Material.CROSSBOW), 2000,
 				"A crossbow that shoots multiple arrows.", ItemCategory.Range, "Multishot Crossbow", MULTISHOT, 1, 1, 26);
 
@@ -127,8 +124,10 @@ public class LSItem {
 
 		if ((Litestrike.getInstance().game_controller.getPlayerData(p).getMoney() - display.price) >= 0) {
 			List<Component> lore = new ArrayList<>();
-			lore.add(Component.text("" + display.price + "\n").color(WHITE).decoration(TextDecoration.ITALIC, false));
+			lore.add(Component.text(""));
+			lore.add(Component.text("" + display.price).color(WHITE).decoration(TextDecoration.ITALIC, false));
 			if (display.description != null) {
+				lore.add(Component.text(""));
 				lore.add(Component.text(display.description).color(WHITE).decoration(TextDecoration.ITALIC, false));
 			}
 			ItemMeta meta = display.displayItem.getItemMeta();

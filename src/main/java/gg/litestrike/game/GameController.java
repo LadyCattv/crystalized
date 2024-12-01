@@ -312,6 +312,8 @@ public class GameController {
 			}
 			p.setGameMode(GameMode.SURVIVAL);
 			p.setHealth(Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
+			Shop s = Shop.getShop(p);
+			s.updateTitle(p, null);
 		}
 
 		// sound effect has a cooldown, so we call it here instead of in round_start
